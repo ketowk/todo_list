@@ -85,7 +85,7 @@ class _AddItemPageState extends State<AddItemPage> {
               Container(
                 padding: EdgeInsets.only(left: 30),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.475,
+                height: MediaQuery.of(context).size.height * 0.6,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
@@ -113,7 +113,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                 hintText: "Type The Task Here ...",
                                 hintStyle: TextStyle(
                                     color: Color(0xFF72435C),
-                                    fontSize: 24.0,
+                                    fontSize: MediaQuery.of(context).size.width / 16,
                                     fontWeight: FontWeight.bold),
                                 //border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -132,16 +132,13 @@ class _AddItemPageState extends State<AddItemPage> {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             "Please Select The Category",
-                            style: TextStyle(color: Color(0xFF72435C), fontSize: 24),
+                            style: TextStyle(color: Color(0xFF72435C), fontSize: MediaQuery.of(context).size.width / 16),
                           ),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 16),
-                              child: TextButton.icon(
+                             TextButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
@@ -170,7 +167,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                       style: TextStyle(
                                         color: textColorBusiness,
                                       ))),
-                            ),
+                            
                             Padding(
                               padding: EdgeInsets.only(
                                   left: MediaQuery.of(context).size.width / 4),

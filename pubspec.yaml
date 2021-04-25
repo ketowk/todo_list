@@ -36,6 +36,7 @@ dependencies:
   flutter_local_notifications: ^5.0.0+1
   provider: ^5.0.0
   dotted_border: ^2.0.0
+  android_alarm_manager: ^2.0.0
 
 dev_dependencies:
   flutter_test:

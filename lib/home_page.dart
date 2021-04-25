@@ -173,9 +173,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             padding: const EdgeInsets.all(24.0),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 36),
-                                  child: Card(
+                                  Card(
                                       elevation: 5,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(25),
@@ -191,32 +189,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           child: Column(children: [
                                           
                                             Container(
-                                                //height: MediaQuery.of(context).size.height * 0.2,
+                                                height: MediaQuery.of(context).size.height * 0.1,
+                                                alignment: Alignment.topCenter,
+                                                //wdi
                                                 child: Image.asset(
                                                     "assets/images/business_icon.png")),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0, bottom: 8.0),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
+                                          
+                                          Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
                                                   businessTasks.toString() +
                                                       " Tasks",
-                                                  style: TextStyle(
-                                                      color: Colors.white, fontSize: 24),
-                                                ),
-                                              ),
-                                            ),
+                                                      style: TextStyle(
+                                                    color: Colors.white, fontSize:  MediaQuery.of(context).size.width / 24)),
+                                            
+                                          ),
                                             CircularPercentIndicator(
-                                              radius: 60,
-                                              lineWidth: 5.0,
-                                              percent: businessPercent,
-                                              center: new Text(businessPc.toString(),style: TextStyle(color: Colors.white),),
-                                              progressColor:
-                                                  Colors.green,
-                                            )
+                                            radius:  MediaQuery.of(context).size.width / 8,
+                                            lineWidth: 5.0,
+                                            percent: 0.5,
+                                            center: new Text("50%",style: TextStyle(color: Colors.white,fontSize: MediaQuery.of(context).size.width / 32),),
+                                            progressColor:
+                                                Colors.green,
+                                          )
                                           ]))),
-                                ),
                                 Card(
                                     elevation: 5,
                                     shape: RoundedRectangleBorder(
@@ -231,25 +227,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             MediaQuery.of(context).size.height /
                                                 4.5,
                                         child: Column(children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 8.0),
-                                            child: Container(
-                                                //height: MediaQuery.of(context).size.height * 0.2,
+
+                                            Container(
+                                                height: MediaQuery.of(context).size.height * 0.1,
+                                                alignment: Alignment.topCenter,
                                                 //wdi
                                                 child: Image.asset(
                                                     "assets/images/social_icon.png")),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 16.0, bottom: 8.0),
-                                            child: Align(
+                                          
+                                          Align(
                                               alignment: Alignment.center,
                                               child: Text(
                                                   socialTasks.toString() +
                                                       " Tasks",
                                                       style: TextStyle(
-                                                    color: Colors.white, fontSize: 24)),
-                                            ),
+                                                    color: Colors.white, fontSize:  MediaQuery.of(context).size.width / 24)),
+                                            
                                           ),
                                           /*Padding(
                                             padding: const EdgeInsets.only(
@@ -266,10 +259,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             ),
                                           ),*/
                                           CircularPercentIndicator(
-                                            radius: 60,
+                                            radius:  MediaQuery.of(context).size.width / 8,
                                             lineWidth: 5.0,
                                             percent: 0.5,
-                                            center: new Text("50%",style: TextStyle(color: Colors.white),),
+                                            center: new Text("50%",style: TextStyle(color: Colors.white,fontSize: MediaQuery.of(context).size.width / 32),),
                                             progressColor:
                                                 Colors.green,
                                           )

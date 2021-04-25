@@ -103,7 +103,7 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+                        padding: EdgeInsets.only(left: 8.0 , top: MediaQuery.of(context).size.height * 0.004),
                         child: Text(lastTitle,
                               style: TextStyle(
                                   decoration: _isSelected
