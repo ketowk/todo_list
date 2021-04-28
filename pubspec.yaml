@@ -37,6 +37,12 @@ dependencies:
   provider: ^5.0.0
   dotted_border: ^2.0.0
   android_alarm_manager: ^2.0.0
+  intl: ^0.17.0
+  timer_builder: ^2.0.0
+  date_format: ^2.0.2
+  flutter_time_picker_spinner: ^1.0.6+1
+  timezone: ^0.7.0
+  google_fonts: ^1.1.1
 
 dev_dependencies:
   flutter_test:

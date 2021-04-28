@@ -1,12 +1,24 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:todo_app/home_page.dart';
+import 'package:todo_app/pages/home_page.dart';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+
+void printHello() {
+  final DateTime now = DateTime.now();
+  final int isolateId = Isolate.current.hashCode;
+  print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    final int helloAlarmID = 0;
+  await AndroidAlarmManager.initialize();
 
   var initializationSettingsAndroid =
       AndroidInitializationSettings('flutter_logo');
@@ -27,6 +39,7 @@ void main() async {
   });
 
   runApp(MyApp());
+   //await AndroidAlarmManager.oneShotAt(DateTime, helloAlarmID, printHello);
 }
 
 class MyApp extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:todo_app/database.dart';
-import 'package:todo_app/home_page.dart';
+import 'package:todo_app/services/database.dart';
+import 'package:todo_app/pages/home_page.dart';
 import 'package:todo_app/utils.dart';
 
 class AddItemPage extends StatefulWidget {
@@ -111,66 +112,67 @@ class _AddItemPageState extends State<AddItemPage> {
                                     left:
                                         MediaQuery.of(context).size.width / 6),
                                 hintText: "Type The Task Here ...",
-                                hintStyle: TextStyle(
-                                    color: Color(0xFF72435C),
-                                    fontSize: MediaQuery.of(context).size.width / 16,
-                                    fontWeight: FontWeight.bold),
-                                //border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
+                                hintStyle: GoogleFonts.montserrat(
+                                      fontSize: MediaQuery.of(context).size.width / 18,
+                                      color: Color(0xFF72435C),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+
                               ),
                             ),
                           ],
                         ),
-                        Divider(
-                          color: Color(0xFF72435C),
-                          thickness: 2.0,
-                        ),
+                        SizedBox(height: 20,),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             "Please Select The Category",
-                            style: TextStyle(color: Color(0xFF72435C), fontSize: MediaQuery.of(context).size.width / 16),
+                            style:GoogleFonts.montserrat(
+                                      fontSize: MediaQuery.of(context).size.width / 18,
+                                      color: Color(0xFF72435C),
+                                    ),
                           ),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                             TextButton.icon(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              buttonColorBusiness),
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                      ))),
-                                  onPressed: () {
-                                    setState(() {
-                                      buttonColorSocial = Colors.white;
-                                      buttonColorBusiness =
-                                          Color.fromRGBO(169, 191, 122, 1);
-                                      textColorSocial = Colors.grey;
-                                      textColorBusiness = Colors.white;
-                                      category = "Business";
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.add_business,
-                                    color: textColorBusiness,
-                                  ),
-                                  label: Text("Business",
-                                      style: TextStyle(
-                                        color: textColorBusiness,
-                                      ))),
+                             Padding(
+                               padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 8),
+                               child: TextButton.icon(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                buttonColorBusiness),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ))),
+                                    onPressed: () {
+                                      setState(() {
+                                        buttonColorSocial = Colors.white;
+                                        buttonColorBusiness =
+                                            Color.fromRGBO(169, 191, 122, 1);
+                                        textColorSocial = Colors.grey;
+                                        textColorBusiness = Colors.white;
+                                        category = "Business";
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.add_business,
+                                      color: textColorBusiness,
+                                    ),
+                                    label: Text("Business",
+                                        style:  GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                      color: textColorBusiness,
+                                    ),)),
+                             ),
                             
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 4),
+                                  left: MediaQuery.of(context).size.width / 8),
                               child: TextButton.icon(
                                   style: ButtonStyle(
                                       backgroundColor:
@@ -197,9 +199,10 @@ class _AddItemPageState extends State<AddItemPage> {
                                     color: textColorSocial,
                                   ),
                                   label: Text("Social",
-                                      style: TextStyle(
-                                        color: textColorSocial,
-                                      ))),
+                                      style:  GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                      color: textColorSocial,
+                                    ),)),
                             ),
                           ],
                         ),
@@ -245,8 +248,12 @@ class _AddItemPageState extends State<AddItemPage> {
                                 color: Colors.white,
                               ),
                               label: Text("Add New Task ",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 24.0))),
+                                  style:  GoogleFonts.montserrat(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                              ),
+                          ),
                         ),
                       ],
                     )

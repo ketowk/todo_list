@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/database.dart';
+import 'package:todo_app/pages/select_hour_page.dart';
+import 'package:todo_app/services/database.dart';
 
 class SelectableListItemWidget extends StatefulWidget {
   final ListItem _listItem;
@@ -113,6 +114,13 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
                       ),
                     ],
                   ),
+
+                  IconButton(icon: Icon(Icons.alarm_add), onPressed: () {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SelectHourPage()));
+                  },)
                 ],
               ),
             ),
