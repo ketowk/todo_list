@@ -72,7 +72,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ":" +
             queryRows[i]['_id'].toString() +
             "*" +
-            queryRows[i]['taskCategory'].toString());
+            queryRows[i]['taskCategory'].toString() + 
+            "/" + 
+            queryRows[i]['taskIsAlarmSetted']);
 
         if (queryRows[i]['taskCategory'] == 'Business') {
           businessTasks++;

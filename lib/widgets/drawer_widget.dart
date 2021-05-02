@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/pages/all_alarms_page.dart';
 import 'package:todo_app/pages/previous_tasks_page.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -59,7 +60,8 @@ return ClipRRect(
                       ),
                       GestureDetector(
                         onTap: () {
-                          print("Button2 clicked");
+                          Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AllAlarmsPage()));
                         },
                         child: Container(
                           height: 22,

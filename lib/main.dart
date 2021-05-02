@@ -1,5 +1,6 @@
 import 'dart:isolate';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:todo_app/pages/home_page.dart';
@@ -46,8 +47,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Flutter Demo',
+      builder: BotToastInit(),
       theme: ThemeData(
         primaryColor: Color.fromRGBO(215, 215, 255, 1),
         accentColor: Color.fromRGBO(249, 250, 255, 1),

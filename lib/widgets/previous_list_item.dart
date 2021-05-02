@@ -71,7 +71,8 @@ class _PreviousListItemWidgetState extends State<PreviousListItemWidget>
     print("date : $date now : $now");
 
     if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
-      time = format.format(date);
+      //time = format.format(date);
+      time = "TODAY";
     } else if (diff.inDays > 0 && diff.inDays < 7) {
       if (diff.inDays == 1) {
         time = diff.inDays.toString() + ' DAY AGO';

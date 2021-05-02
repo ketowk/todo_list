@@ -25,14 +25,16 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
   Animation animation;
   int isSelectedInt = 0;
   String assetImage = "";
+  String isAlarmSetted = "";
 
   @override
   void initState() {
     super.initState();
     lastTitle = _title.substring(0, _title.lastIndexOf(":"));
     dbId = int.parse(_title.substring(_title.lastIndexOf(":") + 1, _title.lastIndexOf(":") + 2));
-    category = _title.substring(_title.lastIndexOf("*")+1);
-    print("last title : $lastTitle  database id : $dbId category : $category");
+    category = _title.substring(_title.lastIndexOf("*")+1, _title.lastIndexOf("/"));
+    isAlarmSetted = _title.substring(_title.lastIndexOf("/")+1);
+    print("last title : $lastTitle  database id : $dbId category : $category  isAlarmSetted : $isAlarmSetted");
     if(category == "Business") {
       assetImage = "assets/images/business_icon.png";
     }
@@ -124,13 +126,13 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
                                       maxLines: 3,),
                   ),
                 ),
-
-                  IconButton(icon: Icon(Icons.alarm_add), onPressed: () {
+                
+                isAlarmSetted == "false" ? IconButton(icon: Icon(Icons.alarm_add), onPressed: () {
                     Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SelectHourPage(title: lastTitle, id: dbId)));
-                  },)
+                  },) : IconButton(icon: Icon(Icons.alarm_on), onPressed: () {},)
                 ],
               ),
             ),

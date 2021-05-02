@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -235,6 +236,10 @@ class _AddItemPageState extends State<AddItemPage> {
                                       DatabaseHelper.columnTaskIsAlarmSetted : "false"
                                 });
 
+                                if(i != null) {
+                                  showSuccesToast("Task Added Successfully");
+                                }
+
                                 List<Map<String, dynamic>> queryRows =
                                     await DatabaseHelper.instance.queryAll();
                                 print(queryRows);
@@ -307,5 +312,27 @@ class _AddItemPageState extends State<AddItemPage> {
             ],
           ),
         )));
+  }
+
+      static void showSuccesToast(String title,
+      {String subTitle,
+      Color backColor = Colors.green,
+      Color titleColor = Colors.white,
+      Color subTitleColor = Colors.white70}) {
+    BotToast.showSimpleNotification(
+      title: title,
+      subTitle: subTitle,
+      align: Alignment.topCenter,
+      hideCloseButton: false,
+      enableSlideOff: true,
+      closeIcon: Icon(
+        Icons.check,
+        color: Colors.white,
+      ),
+      backgroundColor: backColor,
+      backButtonBehavior: BackButtonBehavior.close,
+      subTitleStyle: TextStyle(color: subTitleColor),
+      titleStyle: TextStyle(color: titleColor),
+    );
   }
 }
