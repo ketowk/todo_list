@@ -231,7 +231,8 @@ class _AddItemPageState extends State<AddItemPage> {
                                   DatabaseHelper.columnIsTaskCompleted: 0,
                                   DatabaseHelper.columnTaskCategory: category,
                                   DatabaseHelper.columnTaskTime:
-                                      _selectedDay.millisecondsSinceEpoch
+                                      _selectedDay.millisecondsSinceEpoch,
+                                      DatabaseHelper.columnTaskIsAlarmSetted : "false"
                                 });
 
                                 List<Map<String, dynamic>> queryRows =

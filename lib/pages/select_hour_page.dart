@@ -4,11 +4,16 @@ import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_app/main.dart';
+import 'package:todo_app/services/database.dart';
 import 'package:todo_app/utils.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class SelectHourPage extends StatefulWidget {
+  final String title;
+  final int id;
+
+  const SelectHourPage({Key key, this.title, this.id}) : super(key: key);
   @override
   _SelectHourPageState createState() => _SelectHourPageState();
 }
@@ -113,14 +118,20 @@ class _SelectHourPageState extends State<SelectHourPage> {
               },
             ),
             Divider(
-              height: 32.0,
-              thickness: 4.0,
+              height: 8.0,
               color: Colors.white
             ),
             TextButton.icon(
               icon: Icon(Icons.alarm_add, size: 48, color: Color(0xFF72435C),), onPressed: () {
                 latestDateTime = DateTime.parse("$formattedDate $formattedHours");
                 scheduleAlarm(latestDateTime);
+                DatabaseHelper.instance.insertAlarm({
+                   DatabaseHelper.alarmColumnkDescription:
+                                      widget.title,
+                                  DatabaseHelper.alarmColumnTime: tz.TZDateTime.from(latestDateTime,tz.local).toString(),
+                });
+
+                print(DatabaseHelper.instance.queryAllAlarm());
                 print("$formattedDate  $formattedHours ${DateTime.parse("$formattedDate $formattedHours")}");
               }, 
             label: Text("Add Alarm", style: TextStyle(color: Color(0xFF72435C), fontSize: 32),),)
@@ -144,9 +155,10 @@ class _SelectHourPageState extends State<SelectHourPage> {
   var platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics
   );
-  await flutterLocalNotificationsPlugin.zonedSchedule(0, 'OFFICE', 'Good Morning Time For Office', tz.TZDateTime.from(latestDateTime,tz.local).add(const Duration(seconds: 5)), platformChannelSpecifics, androidAllowWhileIdle: true,
+  await flutterLocalNotificationsPlugin.zonedSchedule(0, widget.title, widget.title, tz.TZDateTime.from(latestDateTime,tz.local), platformChannelSpecifics, androidAllowWhileIdle: true,
     uiLocalNotificationDateInterpretation:
         UILocalNotificationDateInterpretation.absoluteTime);
+
 }
 
 }

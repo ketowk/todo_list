@@ -1,20 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/list_item.dart';
 import 'package:todo_app/pages/select_hour_page.dart';
 import 'package:todo_app/services/database.dart';
 
-class SelectableListItemWidget extends StatefulWidget {
+class PreviousListItemWidget extends StatefulWidget {
   final ListItem _listItem;
 
-  const SelectableListItemWidget(this._listItem);
+  const PreviousListItemWidget(this._listItem);
 
   @override
-  _SelectableListItemWidgetState createState() =>
-      _SelectableListItemWidgetState();
+  _PreviousListItemWidgetState createState() =>
+      _PreviousListItemWidgetState();
 }
 
-class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
+class _PreviousListItemWidgetState extends State<PreviousListItemWidget>
     with TickerProviderStateMixin {
   String get _title => widget._listItem.title;
   String lastTitle;
@@ -25,14 +26,21 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
   Animation animation;
   int isSelectedInt = 0;
   String assetImage = "";
+  int integer;
+  String timeAgo = "";
 
   @override
   void initState() {
     super.initState();
     lastTitle = _title.substring(0, _title.lastIndexOf(":"));
     dbId = int.parse(_title.substring(_title.lastIndexOf(":") + 1, _title.lastIndexOf(":") + 2));
-    category = _title.substring(_title.lastIndexOf("*")+1);
-    print("last title : $lastTitle  database id : $dbId category : $category");
+    category = _title.substring(_title.lastIndexOf("*")+1,  _title.lastIndexOf("/"));
+    print(_title.substring(_title.lastIndexOf("/")+1));
+    integer = int.parse(_title.substring(_title.lastIndexOf("/")+1));
+    timeAgo = readTimestamp(integer);
+    print("integer : $integer");
+    print("time ${readTimestamp(integer)}");
+    print("last title : $lastTitle  database id : $dbId category : $category " );
     if(category == "Business") {
       assetImage = "assets/images/business_icon.png";
     }
@@ -51,6 +59,35 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
     animation = new Tween(begin: 0.0, end: 1.0).animate(curve)
       ..addListener(() => setState(() {}));
     controller.forward(from: 0.0);
+  }
+
+  String readTimestamp(int timestamp) {
+    var now = DateTime.now();
+    var format = DateFormat('HH:mm a');
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    var diff = now.difference(date);
+    var time = '';
+    print("diff ${diff.inHours}");
+    print("date : $date now : $now");
+
+    if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
+      time = format.format(date);
+    } else if (diff.inDays > 0 && diff.inDays < 7) {
+      if (diff.inDays == 1) {
+        time = diff.inDays.toString() + ' DAY AGO';
+      } else {
+        time = diff.inDays.toString() + ' DAYS AGO';
+      }
+    } else {
+      if (diff.inDays == 7) {
+        time = (diff.inDays / 7).floor().toString() + ' WEEK AGO';
+      } else {
+
+        time = (diff.inDays / 7).floor().toString() + ' WEEKS AGO';
+      }
+    }
+
+    return time;
   }
 
   @override
@@ -125,12 +162,7 @@ class _SelectableListItemWidgetState extends State<SelectableListItemWidget>
                   ),
                 ),
 
-                  IconButton(icon: Icon(Icons.alarm_add), onPressed: () {
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SelectHourPage(title: lastTitle, id: dbId)));
-                  },)
+                Text(timeAgo),
                 ],
               ),
             ),

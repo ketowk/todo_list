@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/pages/previous_tasks_page.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -29,7 +30,8 @@ return ClipRRect(
                       ),
                       GestureDetector(
                         onTap: () {
-                          //Modular.to.pushReplacementNamed('/user/activity');
+                                      Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PreviousTasksPage()));
                         },
                         child: Container(
                           height: 22,

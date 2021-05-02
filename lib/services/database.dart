@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final _dbName = 'tasksDatabase1.db';
+  static final _dbName = 'tasksDatabase3.db';
   static final _dbVersion = 1;
   static final _tableName = "tasksTable";
 
@@ -17,6 +17,13 @@ class DatabaseHelper {
   static final columnTaskTime = "taskTime";
   static final columnIsTaskCompleted = "isTaskCompleted";
   static final columnTaskCategory = "taskCategory";
+  static final columnTaskIsAlarmSetted = "taskIsAlarmSetted";
+
+  static final _alarmTableName = "alarmsTable";
+
+  static final alarmColumnId = "_id";
+  static final alarmColumnkDescription = "alarmDescription";
+  static final alarmColumnTime = "alarmTime";
 
   //singleton class
   DatabaseHelper._privateConstructor();
@@ -43,7 +50,15 @@ class DatabaseHelper {
       $columnTaskDescription TEXT NOT NULL,
       $columnTaskTime INTEGER, 
       $columnIsTaskCompleted INTEGER,
-      $columnTaskCategory TEXT NOT NULL)
+      $columnTaskCategory TEXT NOT NULL,
+      $columnTaskIsAlarmSetted TEXT NOT NULL)
+      ''');
+
+    db.execute(''' 
+      CREATE TABLE $_alarmTableName(
+      $alarmColumnId INTEGER PRIMARY KEY, 
+      $alarmColumnkDescription TEXT NOT NULL,
+      $alarmColumnTime INTEGER)
       ''');
   }
 
@@ -52,20 +67,43 @@ class DatabaseHelper {
     return await db.insert(_tableName, row);
   }
 
-  Future<List<Map<String,dynamic>>> queryAll() async {
+  Future<List<Map<String, dynamic>>> queryAll() async {
     Database db = await instance.database;
     return await db.query(_tableName);
   }
 
-  Future<int> update(Map<String,dynamic> row) async {
+  Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnId];
-    return await db.update(_tableName, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db
+        .update(_tableName, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
     Database db = await instance.database;
     return await db.delete(_tableName, where: '$columnId = ?', whereArgs: [id]);
   }
-}
 
+  Future<int> insertAlarm(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(_alarmTableName, row);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllAlarm() async {
+    Database db = await instance.database;
+    return await db.query(_alarmTableName);
+  }
+
+  Future<int> updateAlarm(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    int id = row[alarmColumnId];
+    return await db.update(_alarmTableName, row,
+        where: '$alarmColumnId = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteAlarm(int id) async {
+    Database db = await instance.database;
+    return await db
+        .delete(_alarmTableName, where: '$alarmColumnId = ?', whereArgs: [id]);
+  }
+}

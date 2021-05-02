@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:todo_app/list_item.dart';
 import 'package:todo_app/pages/add_item_page.dart';
 import 'package:todo_app/services/database.dart';
 import 'package:todo_app/widgets/drawer_widget.dart';
@@ -151,138 +153,148 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                         color: Color(0xFF72435C),
-                        child: Container(
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            height: MediaQuery.of(context).size.height / 4,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 6,
-                                ),
-                                Column(children: [
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    'Business',
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 18,
-                                      color: Colors.white,
+                        child: Column(
+                          children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width / 1.2,
+                                height: MediaQuery.of(context).size.height / 5,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
                                     ),
-                                  ),
-                                  Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
+                                    Column(children: [
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        'Business',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.1,
-                                      alignment: Alignment.topCenter,
-                                      //wdi
-                                      child: Image.asset(
-                                          "assets/images/business_icon.png")),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                        businessTasks.toString() + " Tasks",
-                                        style:  GoogleFonts.montserrat(
-                                      fontSize: MediaQuery.of(context)
+                                          alignment: Alignment.topCenter,
+                                          //wdi
+                                          child: Image.asset(
+                                              "assets/images/business_icon.png")),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          businessTasks.toString() + " Tasks",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: MediaQuery.of(context)
                                                     .size
                                                     .width /
                                                 24,
-                                      color: Colors.white,
-                                    ),),
-                                  ),
-                                  SizedBox(height: 5),
-                                  CircularPercentIndicator(
-                                    radius:
-                                        MediaQuery.of(context).size.width / 8,
-                                    lineWidth: 5.0,
-                                    percent: 0.5,
-                                    center: new Text(
-                                      "50%",
-                                      style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      /* CircularPercentIndicator(
+                                        radius:
+                                            MediaQuery.of(context).size.width / 8,
+                                        lineWidth: 5.0,
+                                        percent: 0.5,
+                                        center: new Text(
+                                          "50%",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  32),
+                                        ),
+                                        progressColor: Colors.green,
+                                      ),*/
+                                    ]),
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 6,
+                                    ),
+                                    Column(children: [
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        'Social',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 18,
                                           color: Colors.white,
-                                          fontSize: MediaQuery.of(context)
+                                        ),
+                                      ),
+                                      Container(
+                                          height: MediaQuery.of(context)
                                                   .size
-                                                  .width /
-                                              32),
-                                    ),
-                                    progressColor: Colors.green,
-                                  ),
-                                ]),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 6,
-                                ),
-                                Column(children: [
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    'Social',
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
+                                                  .height *
                                               0.1,
-                                      alignment: Alignment.topCenter,
-                                      //wdi
-                                      child: Image.asset(
-                                          "assets/images/social_icon.png")),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                        socialTasks.toString() + " Tasks",
-                                        style:  GoogleFonts.montserrat(
-                                      fontSize: MediaQuery.of(context)
+                                          alignment: Alignment.topCenter,
+                                          //wdi
+                                          child: Image.asset(
+                                              "assets/images/social_icon.png")),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          socialTasks.toString() + " Tasks",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: MediaQuery.of(context)
                                                     .size
                                                     .width /
                                                 24,
-                                      color: Colors.white,
-                                    ),),
-                                  ),
-                                  /*Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16.0, top: 8.0),
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Social",
-                                                style: TextStyle(
-                                                    fontSize: 24.0,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                          ),*/
-                                SizedBox(height: 5),
-                                  CircularPercentIndicator(
-                                    radius:
-                                        MediaQuery.of(context).size.width / 8,
-                                    lineWidth: 5.0,
-                                    percent: 0.5,
-                                    center: new Text(
-                                      "50%",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              32),
-                                    ),
-                                    progressColor: Colors.green,
-                                  )
-                                ])
-                              ],
-                            ))),
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      /*Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0, top: 8.0),
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                    "Social",
+                                                    style: TextStyle(
+                                                        fontSize: 24.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),*/
+                                      //SizedBox(height: 5),
+                                      /*CircularPercentIndicator(
+                                        radius:
+                                            MediaQuery.of(context).size.width / 8,
+                                        lineWidth: 5.0,
+                                        percent: 0.5,
+                                        center: new Text(
+                                          "50%",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  32),
+                                        ),
+                                        progressColor: Colors.green,
+                                      )*/
+                                    ]),
+                                  ],
+                                )),
+                          ],
+                        )),
                   ],
                 ),
               ),
               Container(
                   padding: EdgeInsets.only(left: 30),
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.635,
+                  height: MediaQuery.of(context).size.height * 0.66,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           //topLeft: Radius.circular(50),
@@ -298,9 +310,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             alignment: Alignment.topCenter,
                             child: Text(
                               "TODAY'S TASKS",
-                              style: TextStyle(
-                                fontSize: 42.0,
-                                fontFamily: 'Kind',
+                              style: GoogleFonts.montserrat(
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 12,
+                                color: Color(0xFF72435C),
                               ),
                             )),
                       ),
